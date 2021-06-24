@@ -19,7 +19,7 @@ function SignUpForm({
         <div className="form-field">
           <TextField
             className="text-field"
-            label="Enter Name"
+            label="Enter Name*"
             variant="outlined"
             name="name"
             value={name}
@@ -29,7 +29,7 @@ function SignUpForm({
         <div className="form-field">
           <TextField
             className="text-field"
-            label="Enter userId"
+            label="Enter userId*"
             variant="outlined"
             name="userId"
             value={userId}
@@ -41,7 +41,7 @@ function SignUpForm({
         <div className="form-field">
           <TextField
             className="text-field"
-            label="Enter Email"
+            label="Enter Email*"
             variant="outlined"
             name="userEmail"
             value={userEmail}
@@ -51,7 +51,7 @@ function SignUpForm({
         <div className="form-field">
           <TextField
             className="text-field"
-            label="Enter Phone"
+            label="Enter Phone*"
             variant="outlined"
             name="userPhone"
             value={userPhone}
@@ -62,7 +62,7 @@ function SignUpForm({
       <div className="form-field-select">
         <TextField
           id="select-field"
-          label="Notification"
+          label="Notification*"
           variant="outlined"
           name="notify"
           value={notify}
