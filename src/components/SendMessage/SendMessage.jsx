@@ -10,10 +10,12 @@ function SendMessage() {
   const [allUser, setAllUsers] = useState([]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [noNotify, setNoNotify] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_DJANGO}/user/list`)
+      .get(`${process.env.REACT_APP_DJANGO}/user/list/`)
       .then((res) => {
         setAllUsers(res.data);
         const options = res.data.map((user) => {
@@ -42,15 +44,18 @@ function SendMessage() {
         userMessage: message,
       };
       axios
-        .post(`${process.env.REACT_APP_DJANGO}/phone/sms`, postObj)
+        .post(`${process.env.REACT_APP_DJANGO}/phone/sms/`, postObj)
         .then(() => {
           setMessage("");
           setSelectedOption(null);
+          setError(false);
+          setSuccess(true);
         })
         .catch(() => {
           setError(true);
+          setSuccess(true);
         });
-    } else {
+    } else if (selectedUser.notify === "email") {
       const postObj = {
         userEmail: selectedUser.userEmail,
         userMessage: message,
@@ -60,10 +65,15 @@ function SendMessage() {
         .then(() => {
           setMessage("");
           setSelectedOption(null);
+          setError(false);
+          setSuccess(true);
         })
         .catch(() => {
           setError(true);
+          setSuccess(false);
         });
+    } else {
+      setNoNotify(true);
     }
   };
 
@@ -79,6 +89,28 @@ function SendMessage() {
       }}
     >
       Opps! Message not sent, We are looking into it.
+    </p>
+  );
+
+  const successMessage = (
+    <p
+      style={{
+        color: "blue",
+        fontStyle: "italic",
+      }}
+    >
+      Message sent!
+    </p>
+  );
+
+  const noNotifyMessage = (
+    <p
+      style={{
+        color: "green",
+        fontStyle: "italic",
+      }}
+    >
+      This user does not allow messages!
     </p>
   );
 
@@ -106,6 +138,8 @@ function SendMessage() {
           />
         </div>
         {error && errorMessage}
+        {success && successMessage}
+        {noNotify && noNotifyMessage}
         <Button variant="contained" color="primary" onClick={sendMessage}>
           Send Message
         </Button>

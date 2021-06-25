@@ -43,9 +43,6 @@ function UserPage() {
           <Button id="menu-buttons" onClick={() => setMenuSwitch("edit")}>
             Edit Preference
           </Button>
-          <Button id="menu-buttons" color="secondary">
-            Delete Profile
-          </Button>
         </div>
       </div>
       <div className="user-actions">{content}</div>

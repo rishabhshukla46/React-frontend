@@ -5,14 +5,14 @@
   justify-content: space-around;
   height: 50vh;
 }
-.form-field-signup {
+.form-field-edit {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
 }
-#select-field {
-  padding: 20px 100px;
+#select-field-edit {
+  padding: 20px 50px;
+  margin-top: 5px;
   text-align: left;
 }
 .signup-button {
